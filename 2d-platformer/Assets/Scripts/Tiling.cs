@@ -59,7 +59,7 @@ public class Tiling : MonoBehaviour {
 			newTiling.localScale = new Vector3 (newTiling.localScale.x * -1, newTiling.localScale.y, newTiling.localScale.z);		
 		}
 
-		newTiling.transform.parent = myTransform.parent;
+        newTiling.transform.parent = myTransform.transform;
 
 		if (direction > 0) 
 		{
