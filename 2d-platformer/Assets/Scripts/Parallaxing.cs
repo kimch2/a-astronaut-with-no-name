@@ -4,28 +4,21 @@ using UnityEngine;
 
 public class Parallaxing : MonoBehaviour {
 
+	public Transform[] Backgrounds;
+	public float Smoothing = 1f;
+
 	private Transform mainCamera;
 	private Vector3 previousCameraPosition;
 	private float[] parallaxScales;
 
-	public Transform[] Backgrounds;
-	public float Smoothing = 1f;
 
 	void Awake () {
 		mainCamera = Camera.main.transform;
 	}
 
 	void Start () {
-		previousCameraPosition = mainCamera.position;
-        FillParallaxScales();
-	}
-	
-	void Update () {
-		ShiftBackgrounds();
-		previousCameraPosition = mainCamera.position;
-	}
-
-	void FillParallaxScales() {
+        SetPreviousCameraPosition();
+        
         parallaxScales = new float[Backgrounds.Length];
 
         int cont = 0;
@@ -35,8 +28,8 @@ public class Parallaxing : MonoBehaviour {
             cont++;
         }
 	}
-
-	void ShiftBackgrounds() {
+	
+	void Update () {
         float parallax;
         float backgroundTargetPositionX;
         Vector3 backgroundTargetPosition;
@@ -54,5 +47,12 @@ public class Parallaxing : MonoBehaviour {
 
             cont++;
         }
+
+        SetPreviousCameraPosition();
 	}
+
+    void SetPreviousCameraPosition() {
+        previousCameraPosition = mainCamera.position;
+    }
+
 }
