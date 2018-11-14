@@ -4,70 +4,68 @@ using UnityEngine;
 
 [RequireComponent (typeof (SpriteRenderer))]
 public class Tiling : MonoBehaviour {
-
 	
-	public int OffsetX = 2;
-	public bool HasRightTiling = false;
-	public bool HasLeftTiling = false;
-	public bool ReverseScale = false;
-
-	private float spriteWidth = 0f;
-	private Camera mainCamera;
-	private Transform myTransform;
+	public int offsetX = 2;
+	public bool hasRightTiling = false;
+	public bool hasLeftTiling = false;
+	public bool reverseScale = false;
+	private float m_SpriteWidth = 0f;
+	private Camera m_MainCamera;
+	private Transform m_Transform;
+    private float m_TilingPositionX;
+    private Vector3 m_TilingPosition;
+    private Transform m_NewTiling;
 
 	void Awake() {
-		mainCamera = Camera.main;
-		myTransform = transform;
+		m_MainCamera = Camera.main;
+		m_Transform = transform;
 	}
 
 	void Start () {
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-		spriteWidth = spriteRenderer.sprite.bounds.size.x;
+		m_SpriteWidth = spriteRenderer.sprite.bounds.size.x;
 	}
 	
 	void Update () {
-		if (HasLeftTiling == false || HasRightTiling == false) 
+		if (hasLeftTiling == false || hasRightTiling == false) 
 		{
-			float cameraHorizontalExtend = mainCamera.orthographicSize * Screen.width / Screen.height;
+			float cameraHorizontalExtend = m_MainCamera.orthographicSize * Screen.width / Screen.height;
+			float edgeVisiblePositionRight = (m_Transform.position.x + m_SpriteWidth / 2) - cameraHorizontalExtend;
+			float edgeVisiblePositionLeft = (m_Transform.position.x - m_SpriteWidth / 2) + cameraHorizontalExtend;
 
-			float edgeVisiblePositionRight = (myTransform.position.x + spriteWidth / 2) - cameraHorizontalExtend;
-			float edgeVisiblePositionLeft = (myTransform.position.x - spriteWidth / 2) + cameraHorizontalExtend;
-
-			if (mainCamera.transform.position.x >= (edgeVisiblePositionRight - OffsetX) && HasRightTiling == false) 
+			if (m_MainCamera.transform.position.x >= (edgeVisiblePositionRight - offsetX) && hasRightTiling == false) 
 			{
 				MakeNewTiling(1);
-				HasRightTiling = true;
+				hasRightTiling = true;
 			}
-			else if (mainCamera.transform.position.x <= (edgeVisiblePositionLeft + OffsetX) && HasLeftTiling == false)
+			else if (m_MainCamera.transform.position.x <= (edgeVisiblePositionLeft + offsetX) && hasLeftTiling == false)
 			{
 				MakeNewTiling(-1);
-				HasLeftTiling = true;
+				hasLeftTiling = true;
 			}
 
 		}
 	}
 
 	void MakeNewTiling (int direction) {
-		float tilingPositionX = myTransform.position.x + spriteWidth * direction;
+		m_TilingPositionX = m_Transform.position.x + m_SpriteWidth * direction;
+		m_TilingPosition =  new Vector3(m_TilingPositionX, m_Transform.position.y, m_Transform.position.z);
+		m_NewTiling = (Transform) Instantiate (m_Transform, m_TilingPosition, m_Transform.rotation);
 
-		Vector3 tilingPosition =  new Vector3(tilingPositionX, myTransform.position.y, myTransform.position.z);
-
-		Transform newTiling = (Transform) Instantiate (myTransform, tilingPosition, myTransform.rotation);
-
-		if (ReverseScale == true) 
+		if (reverseScale == true) 
 		{
-			newTiling.localScale = new Vector3 (newTiling.localScale.x * -1, newTiling.localScale.y, newTiling.localScale.z);		
+			m_NewTiling.localScale = new Vector3 (m_NewTiling.localScale.x * -1, m_NewTiling.localScale.y, m_NewTiling.localScale.z);		
 		}
 
-        newTiling.transform.parent = myTransform.transform;
+        m_NewTiling.parent = m_Transform.parent;
 
 		if (direction > 0) 
 		{
-			newTiling.GetComponent<Tiling>().HasLeftTiling = true;
+			m_NewTiling.GetComponent<Tiling>().hasLeftTiling = true;
 		}
 		else 
 		{
-			newTiling.GetComponent<Tiling>().HasRightTiling = true;
+			m_NewTiling.GetComponent<Tiling>().hasRightTiling = true;
 		}
 	}
 }

@@ -4,55 +4,49 @@ using UnityEngine;
 
 public class Parallaxing : MonoBehaviour {
 
-	public Transform[] Backgrounds;
-	public float Smoothing = 1f;
-
-	private Transform mainCamera;
-	private Vector3 previousCameraPosition;
-	private float[] parallaxScales;
-
+	public Transform[] backgrounds;
+	public float smoothing = 1f;
+	private Transform m_MainCamera;
+	private Vector3 m_PreviousCameraPosition;
+	private float[] m_ParallaxScales;
+    private float m_Parallax;
+    private float m_BackgroundTargetPositionX;
+    private Vector3 m_BackgroundTargetPosition;
 
 	void Awake () {
-		mainCamera = Camera.main.transform;
+		m_MainCamera = Camera.main.transform;
 	}
 
 	void Start () {
         SetPreviousCameraPosition();
-        
-        parallaxScales = new float[Backgrounds.Length];
-
+        m_ParallaxScales = new float[backgrounds.Length];
         int cont = 0;
-        foreach (var background in Backgrounds)
+        foreach (var background in backgrounds)
         {
-            parallaxScales[cont] = background.position.z * -1;
+            m_ParallaxScales[cont] = background.position.z * -1;
             cont++;
         }
 	}
 	
 	void Update () {
-        float parallax;
-        float backgroundTargetPositionX;
-        Vector3 backgroundTargetPosition;
-
         int cont = 0;
-        foreach (var background in Backgrounds)
+        foreach (var background in backgrounds)
         {
-            parallax = (previousCameraPosition.x - mainCamera.position.x) * parallaxScales[cont];
+            m_Parallax = (m_PreviousCameraPosition.x - m_MainCamera.position.x) * m_ParallaxScales[cont];
 
-            backgroundTargetPositionX = background.position.x + parallax;
+            m_BackgroundTargetPositionX = background.position.x + m_Parallax;
 
-            backgroundTargetPosition = new Vector3(backgroundTargetPositionX, background.position.y, background.position.z);
+            m_BackgroundTargetPosition = new Vector3(m_BackgroundTargetPositionX, background.position.y, background.position.z);
 
-            background.position = Vector3.Lerp(background.position, backgroundTargetPosition, Smoothing * Time.deltaTime);
+            background.position = Vector3.Lerp(background.position, m_BackgroundTargetPosition, smoothing * Time.deltaTime);
 
             cont++;
         }
-
         SetPreviousCameraPosition();
 	}
 
     void SetPreviousCameraPosition() {
-        previousCameraPosition = mainCamera.position;
+        m_PreviousCameraPosition = m_MainCamera.position;
     }
 
 }
