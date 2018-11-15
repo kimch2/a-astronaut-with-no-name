@@ -444,6 +444,12 @@ MonoBehaviour:
   fireRate: 0
   damage: 50
   range: 100
+  effectSpawnRate: 10
+  muzzleFlashLifeTime: 0.02
+  bulletTrail: {fileID: 4075121454169314, guid: 3a0602e2014a0304ca8241b23386565d,
+    type: 2}
+  muzzleFlash: {fileID: 4837002253090246, guid: a2af38a0314a28944bbf3f58c0f04a92,
+    type: 2}
   whatToHit:
     serializedVersion: 2
     m_Bits: 4294967035
@@ -461,6 +467,12 @@ MonoBehaviour:
   fireRate: 200
   damage: 25
   range: 70
+  effectSpawnRate: 10
+  muzzleFlashLifeTime: 0.02
+  bulletTrail: {fileID: 4075121454169314, guid: 3a0602e2014a0304ca8241b23386565d,
+    type: 2}
+  muzzleFlash: {fileID: 4837002253090246, guid: a2af38a0314a28944bbf3f58c0f04a92,
+    type: 2}
   whatToHit:
     serializedVersion: 2
     m_Bits: 4294967035

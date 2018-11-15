@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4075121454169314}
   - component: {fileID: 120637916100380300}
+  - component: {fileID: 114867844588552696}
   m_Layer: 0
   m_Name: BulletTrail
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114867844588552696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603323747780660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c24549f0d0d3048be7aa2e33cc43ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 230
 --- !u!120 &120637916100380300
 LineRenderer:
   m_ObjectHideFlags: 1
