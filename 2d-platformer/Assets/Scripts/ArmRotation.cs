@@ -14,8 +14,11 @@ public class ArmRotation : MonoBehaviour {
 	}
     void Update () {
 		m_MouseToArmDifference = m_MainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
         m_MouseToArmDifference.Normalize();
+
         m_RotationZ = Mathf.Atan2(m_MouseToArmDifference.y, m_MouseToArmDifference.x) * Mathf.Rad2Deg;
+		
 		transform.rotation = Quaternion.Euler(0f, 0f, m_RotationZ + offset);
 	}
 }
