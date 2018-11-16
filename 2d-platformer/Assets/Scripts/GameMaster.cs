@@ -5,11 +5,12 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour {
 
 	public float spawnDelay = 2f;
+	public float spawnParticleLifetime = 3f;
 	public Transform playerPrefab;
 	public Transform spawnPoint;
 	public static GameMaster gm;
 
-	void Start() {
+    void Start() {
 		if (!gm) {
 			gm = GameObject.FindGameObjectWithTag ("GM").GetComponent<GameMaster>();
 		}
@@ -18,6 +19,7 @@ public class GameMaster : MonoBehaviour {
 	public IEnumerator RespawnPlayer () {
 		yield return new WaitForSeconds(spawnDelay);
 		Instantiate (playerPrefab, spawnPoint.position, spawnPoint.rotation);
+
 	}
 	
 	public static void KillPlayer (Player player) {
