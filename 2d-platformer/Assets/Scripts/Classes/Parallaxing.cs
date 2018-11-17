@@ -9,9 +9,6 @@ public class Parallaxing : MonoBehaviour {
 	private Transform m_MainCamera;
 	private Vector3 m_PreviousCameraPosition;
 	private float[] m_ParallaxScales;
-    private float m_Parallax;
-    private float m_BackgroundTargetPositionX;
-    private Vector3 m_BackgroundTargetPosition;
 
 	void Awake () {
 		m_MainCamera = Camera.main.transform;
@@ -32,13 +29,13 @@ public class Parallaxing : MonoBehaviour {
         int cont = 0;
         foreach (var background in backgrounds)
         {
-            m_Parallax = (m_PreviousCameraPosition.x - m_MainCamera.position.x) * m_ParallaxScales[cont];
+            float parallax = (m_PreviousCameraPosition.x - m_MainCamera.position.x) * m_ParallaxScales[cont];
 
-            m_BackgroundTargetPositionX = background.position.x + m_Parallax;
+            float backgroundTargetPositionX = background.position.x + parallax;
 
-            m_BackgroundTargetPosition = new Vector3(m_BackgroundTargetPositionX, background.position.y, background.position.z);
+            Vector3 backgroundTargetPosition = new Vector3(backgroundTargetPositionX, background.position.y, background.position.z);
 
-            background.position = Vector3.Lerp(background.position, m_BackgroundTargetPosition, smoothing * Time.deltaTime);
+            background.position = Vector3.Lerp(background.position, backgroundTargetPosition, smoothing * Time.deltaTime);
 
             cont++;
         }

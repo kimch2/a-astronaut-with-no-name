@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IDamageable<int> {
 
 	[System.Serializable]
 	public class PlayerStats {
@@ -26,8 +26,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void Kill() {
-		GameMaster.KillPlayer(this);
+	public void Kill() {
+        Destroy(gameObject);
+        GameMaster.SpawnPlayer();
 	}
 	
 }

@@ -12,9 +12,6 @@ public class Tiling : MonoBehaviour {
 	private float m_SpriteWidth = 0f;
 	private Camera m_MainCamera;
 	private Transform m_Transform;
-    private float m_TilingPositionX;
-    private Vector3 m_TilingPosition;
-    private Transform m_NewTiling;
 
 	void Awake() {
 		m_MainCamera = Camera.main;
@@ -48,24 +45,25 @@ public class Tiling : MonoBehaviour {
 	}
 
 	void MakeNewTiling (int direction) {
-		m_TilingPositionX = m_Transform.position.x + m_SpriteWidth * direction;
-		m_TilingPosition =  new Vector3(m_TilingPositionX, m_Transform.position.y, m_Transform.position.z);
-		m_NewTiling = (Transform) Instantiate (m_Transform, m_TilingPosition, m_Transform.rotation);
+		float tilingPositionX = m_Transform.position.x + m_SpriteWidth * direction;
+        Vector3 tilingPosition = new Vector3(tilingPositionX, m_Transform.position.y, m_Transform.position.z);
+
+    	Transform newTiling = (Transform) Instantiate (m_Transform, tilingPosition, m_Transform.rotation);
 
 		if (reverseScale == true) 
 		{
-			m_NewTiling.localScale = new Vector3 (m_NewTiling.localScale.x * -1, m_NewTiling.localScale.y, m_NewTiling.localScale.z);		
+			newTiling.localScale = new Vector3 (newTiling.localScale.x * -1, newTiling.localScale.y, newTiling.localScale.z);		
 		}
 
-        m_NewTiling.parent = m_Transform.parent;
+        newTiling.parent = m_Transform.parent;
 
 		if (direction > 0) 
 		{
-			m_NewTiling.GetComponent<Tiling>().hasLeftTiling = true;
+			newTiling.GetComponent<Tiling>().hasLeftTiling = true;
 		}
 		else 
 		{
-			m_NewTiling.GetComponent<Tiling>().hasRightTiling = true;
+			newTiling.GetComponent<Tiling>().hasRightTiling = true;
 		}
 	}
 }

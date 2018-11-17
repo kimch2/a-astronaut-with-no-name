@@ -199,6 +199,24 @@ Transform:
   m_Father: {fileID: 683293597}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &477719272 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1226922597584294, guid: a34810c483809dd41b7b885541c16483,
+    type: 2}
+  m_PrefabInternal: {fileID: 1593208651}
+--- !u!114 &477719273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477719272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980baf53d3b6db34bb3241198a6c6765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStats:
+    health: 100
 --- !u!1 &683293596
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 750424244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -1.6, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1084503405}
@@ -610,7 +628,39 @@ MonoBehaviour:
     _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
     _AreaColors:
     - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
@@ -1175,11 +1225,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 50963073386668366, guid: 5e5f19688000f3a45b5a2adf16321b0c,
-        type: 2}
-      propertyPath: m_GravityScale
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
