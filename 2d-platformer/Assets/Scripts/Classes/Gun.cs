@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour {
 	public int damage = 100;
 	public float range = 100f;
 	public float effectSpawnRate = 10;
+	public float cameraShakeAmount = .1f;
+	public float cameraShakeLength = .1f;
 	public float muzzleFlashLifeTime = 0.02f;
 	public Transform bulletTrail;
 	public Transform hitPrefab;
@@ -18,7 +20,8 @@ public class Gun : MonoBehaviour {
 	private float m_TimeToSpawnEffect = 0;
 	private Transform m_FirePoint;
 
-    void Awake () {
+    void Awake () 
+	{
 		m_FirePoint = transform.Find ("FirePoint");
 		if (!m_FirePoint) 
 		{
@@ -26,7 +29,8 @@ public class Gun : MonoBehaviour {
 		}
 	}
 
-	void Update () {
+	void Update () 
+	{
 		if (fireRate == 0) 
 		{
 			if (Input.GetButtonDown ("Fire1")) Shoot();
@@ -40,7 +44,8 @@ public class Gun : MonoBehaviour {
 		}
 	}
 
-	void Shoot () {
+	void Shoot () 
+	{
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 target = new Vector2 (mousePosition.x, mousePosition.y);
         Vector2 firePointPosition = new Vector2 (m_FirePoint.position.x, m_FirePoint.position.y);
@@ -76,7 +81,8 @@ public class Gun : MonoBehaviour {
         }
 	}
 
-	void Effect(Vector3 hitPosition, Vector3 hitNormal) {
+	void Effect(Vector3 hitPosition, Vector3 hitNormal) 
+	{
 		Transform trail = (Transform) Instantiate (bulletTrail, m_FirePoint.position, m_FirePoint.rotation);
 
 		LineRenderer line = trail.GetComponent<LineRenderer>();
@@ -101,5 +107,7 @@ public class Gun : MonoBehaviour {
 		currentMuzzleFlash.localScale = new Vector3(size, size, size);
 
 		Destroy(currentMuzzleFlash.gameObject, muzzleFlashLifeTime);
+
+		GameMaster.ShakeCamera (cameraShakeAmount, cameraShakeLength);
 	}
 }

@@ -457,9 +457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0
-  damage: 50
+  damage: 20
   range: 100
   effectSpawnRate: 10
+  cameraShakeAmount: 0.025
+  cameraShakeLength: 0.1
   muzzleFlashLifeTime: 0.02
   bulletTrail: {fileID: 4075121454169314, guid: 3a0602e2014a0304ca8241b23386565d,
     type: 2}
@@ -484,6 +486,8 @@ MonoBehaviour:
   damage: 100
   range: 70
   effectSpawnRate: 10
+  cameraShakeAmount: 0.1
+  cameraShakeLength: 0.1
   muzzleFlashLifeTime: 0.02
   bulletTrail: {fileID: 4075121454169314, guid: 3a0602e2014a0304ca8241b23386565d,
     type: 2}
