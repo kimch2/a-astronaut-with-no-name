@@ -5,8 +5,7 @@ public class StatusIndicator : MonoBehaviour {
 
 	[SerializeField]
 	private RectTransform healthBarRect;
-	private Image m_healthBarImage;
-
+	private Image m_HealthBarImage;
 
 	void Start () 
 	{
@@ -18,10 +17,12 @@ public class StatusIndicator : MonoBehaviour {
 
 	public void SetHealth (int currentHealth, int maxHealth)
 	{
-		float value = (float) currentHealth / maxHealth;
-		healthBarRect.localScale = new Vector3(value, healthBarRect.localScale.y, healthBarRect.localScale.z);
-		if (m_healthBarImage == null) m_healthBarImage = healthBarRect.GetComponent<Image>();
-        m_healthBarImage.color = Color.Lerp(Color.red, Color.green, value * 1.2f);
+		float health = (float) currentHealth / maxHealth;
+		healthBarRect.localScale = new Vector3(health, healthBarRect.localScale.y, healthBarRect.localScale.z);
+
+		if (m_HealthBarImage == null) m_HealthBarImage = healthBarRect.GetComponent<Image>();
+
+        m_HealthBarImage.color = Color.Lerp(Color.red, Color.green, health * 1.2f);
 	}
 	
 }

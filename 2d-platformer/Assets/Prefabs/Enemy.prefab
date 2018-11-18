@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114263700152027584}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,9 +74,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226922597584294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.73, y: -1.8276045, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.029999, y: 5.972396, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 224252480415672136}
   m_Father: {fileID: 0}
@@ -161,7 +161,7 @@ MonoBehaviour:
     type: 2}
   stats:
     maxHealth: 100
-    damage: 60
+    damage: 100
   statusIndicator: {fileID: 114714496277882144}
 --- !u!114 &114381219476724376
 MonoBehaviour:
