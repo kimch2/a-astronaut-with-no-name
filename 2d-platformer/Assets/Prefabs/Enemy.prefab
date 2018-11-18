@@ -161,7 +161,7 @@ MonoBehaviour:
     type: 2}
   stats:
     maxHealth: 100
-    damage: 40
+    damage: 60
   statusIndicator: {fileID: 114714496277882144}
 --- !u!114 &114381219476724376
 MonoBehaviour:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reachTarget: 0
   updateRate: 2
-  speed: 300
+  speed: 600
   maxWaypointDistance: 3
   searchTargetRate: 0.5
   targetTag: Player

@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
         if (player != null) 
         {
             player.Damage(stats.damage);
+            Kill();
         } 
     }
 
