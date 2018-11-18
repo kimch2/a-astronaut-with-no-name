@@ -5,30 +5,64 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable<int> {
 
 	[System.Serializable]
-	public class PlayerStats {
-		public int health = 100;
-	}
+	public class Stats {
+        public int maxHealth = 100;
+        public int currentHealth
+        {
+            get { return m_CurrentHealth; }
+            set { m_CurrentHealth = Mathf.Clamp(value, 0, maxHealth); }
+        }
+
+        private int m_CurrentHealth;
+
+        public void Init()
+        {
+            currentHealth = maxHealth;
+        }
+    }
 
 	public int fallBoundary = -20;
-	public PlayerStats playerStats = new PlayerStats();
+	public Stats stats = new Stats();
 
-	void Update () {
+    [Header("Optional: ")]
+    [SerializeField]
+    private StatusIndicator statusIndicator;
+
+    void Start()
+    {
+        stats.Init();
+        setHealthStatus();
+    }
+
+    void Update () 
+    {
 		if (transform.position.y <= fallBoundary) {
             Kill();
 		}
 	}
 
-	public void Damage (int damage) {
-		playerStats.health -= damage;
+	public void Damage (int damage) 
+    {
+        stats.currentHealth -= damage;
 
-		if (playerStats.health <= 0) {
+		setHealthStatus();
+		if (stats.currentHealth <= 0) {
 			Kill();
 		}
 	}
 
-	public void Kill() {
+	public void Kill() 
+    {
         Destroy(gameObject);
         GameMaster.SpawnPlayer();
 	}
+
+    void setHealthStatus()
+    {
+        if (statusIndicator != null)
+        {
+            statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+        }
+    }
 	
 }

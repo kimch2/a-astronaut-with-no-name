@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour {
 		m_FirePoint = transform.Find ("FirePoint");
 		if (!m_FirePoint) 
 		{
-			Debug.LogError ("Gun does not have a firepoint");
+			Debug.LogError ("GUN: Gun does not have a firepoint");
 		}
 	}
 

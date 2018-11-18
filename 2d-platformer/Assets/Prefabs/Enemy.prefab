@@ -155,8 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980baf53d3b6db34bb3241198a6c6765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStats:
+  cameraDeathShakeAmount: 0.1
+  cameraDeathShakeLength: 0.1
+  deathParticles: {fileID: 4946414318175844, guid: e3438a4e312aeaa4cb670d6f57e90c48,
+    type: 2}
+  stats:
     maxHealth: 100
+    damage: 40
   statusIndicator: {fileID: 114714496277882144}
 --- !u!114 &114381219476724376
 MonoBehaviour:

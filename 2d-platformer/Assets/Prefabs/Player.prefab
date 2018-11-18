@@ -443,8 +443,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallBoundary: -20
-  playerStats:
-    health: 100
+  stats:
+    maxHealth: 100
+  statusIndicator: {fileID: 0}
 --- !u!114 &114304516454424304
 MonoBehaviour:
   m_ObjectHideFlags: 1

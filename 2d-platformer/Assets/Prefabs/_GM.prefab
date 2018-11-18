@@ -36,6 +36,7 @@ GameObject:
   - component: {fileID: 4278475016608114}
   - component: {fileID: 114327863058121732}
   - component: {fileID: 114995490942516682}
+  - component: {fileID: 114917569533165224}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GM
@@ -50,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -5.3, z: 0}
+  m_LocalPosition: {x: -0.3, y: -7.8, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4322780629142818}
@@ -86,6 +87,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   smoothing: 1
+--- !u!114 &114917569533165224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344406847518466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e22042a22beec4198919ec27b1c5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
 --- !u!114 &114995490942516682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,9 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1781205cb6a44ad47a726212e0278144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 2
   playerPrefab: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c,
     type: 2}
   spawnPoint: {fileID: 4322780629142818}
-  spawnParticles: {fileID: 4151148860034540, guid: 04f13071bf608c646a01ebb7cab154ed,
-    type: 2}
