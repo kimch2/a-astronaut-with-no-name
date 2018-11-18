@@ -22,16 +22,24 @@ public class Player : MonoBehaviour, IDamageable<int> {
     }
 
 	public int fallBoundary = -20;
+    public string deathSoundVoice = "DeathVoice";
 	public Stats stats = new Stats();
 
     [Header("Optional: ")]
     [SerializeField]
     private StatusIndicator statusIndicator;
+    private AudioManager m_AudioManager;
 
     void Start()
     {
         stats.Init();
         setHealthStatus();
+        
+        m_AudioManager = AudioManager.instance;
+        if (m_AudioManager == null)
+        {
+            Debug.LogError("No AudioManager in the scene");
+        }
     }
 
     void Update () 
@@ -53,6 +61,7 @@ public class Player : MonoBehaviour, IDamageable<int> {
 
 	public void Kill() 
     {
+        m_AudioManager.PlaySound(deathSoundVoice);
         Destroy(gameObject);
         GameMaster.GameOver();
 	}

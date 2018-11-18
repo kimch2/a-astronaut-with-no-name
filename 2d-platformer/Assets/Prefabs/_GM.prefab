@@ -51,9 +51,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -7.8, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4322780629142818}
   m_Father: {fileID: 0}
@@ -66,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1003955664498156}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.6400001, z: 0}
+  m_LocalPosition: {x: 14.46, y: 1.6400001, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4278475016608114}
@@ -78,11 +78,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce32bb6d05d0ad468c38cca0bd898ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenWaves: 5
   waves:
   - name: Easy
     enemy: {fileID: 4989616563938844, guid: a34810c483809dd41b7b885541c16483, type: 2}
@@ -96,7 +97,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeBetweenWaves: 5
 --- !u!114 &114327863058121732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,8 +111,7 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  smoothing: 1
+  smoothing: 0.5
 --- !u!114 &114917569533165224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,3 +138,4 @@ MonoBehaviour:
   playerPrefab: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c,
     type: 2}
   spawnPoint: {fileID: 4322780629142818}
+  m_GameOverUI: {fileID: 0}

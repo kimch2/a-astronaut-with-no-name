@@ -6,17 +6,18 @@ public class GameMaster : MonoBehaviour {
 
 	public Transform playerPrefab;
 	public Transform spawnPoint;
-	public static GameMaster gameMaster;
+	public static GameMaster instance;
 	private static CameraShake m_CameraShake;
 
 	[SerializeField]
 	private GameObject m_GameOverUI;
-
+    private AudioManager m_AudioManager;
+	
     void Awake () 
 	{
-		if (!gameMaster) 
+		if (!instance) 
 		{
-			gameMaster = GameObject.FindGameObjectWithTag ("GM").GetComponent<GameMaster>();
+			instance = GameObject.FindGameObjectWithTag ("GM").GetComponent<GameMaster>();
 		}
 		if (!m_CameraShake)
 		{
@@ -26,13 +27,19 @@ public class GameMaster : MonoBehaviour {
 
 	void Start ()
 	{
-        AudioManager.PlaySound("Soundtrack");
+        m_AudioManager = AudioManager.instance;
+
+        if (m_AudioManager == null)
+        {
+            Debug.LogError("No AudioManager in the scene");
+        }
+        m_AudioManager.PlaySound("MainLevelSoundtrack");
 	}
 
 	public static void GameOver ()
 	{
-		gameMaster.m_GameOverUI.SetActive(true);
-        AudioManager.StopSound("Soundtrack");
+		instance.m_GameOverUI.SetActive(true);
+        instance.m_AudioManager.StopSound("MainLevelSoundtrack");
 	}
 
 	public static void ShakeCamera (float amount, float length)

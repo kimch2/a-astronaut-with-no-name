@@ -81,9 +81,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f65ab73fa0c5fc4bad28a03a366172a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 200
-  damage: 25
-  range: 70
+  fireRate: 500
+  damage: 20
+  range: 100
+  effectSpawnRate: 10
+  cameraShakeAmount: 0.025
+  cameraShakeLength: 0.1
+  muzzleFlashLifeTime: 0.02
+  shootSound: DefaultShoot
+  bulletTrail: {fileID: 4075121454169314, guid: 3a0602e2014a0304ca8241b23386565d,
+    type: 2}
+  hitPrefab: {fileID: 4832518456231342, guid: 32dbf061c85706940bf29407a02be468, type: 2}
+  muzzleFlash: {fileID: 4837002253090246, guid: a2af38a0314a28944bbf3f58c0f04a92,
+    type: 2}
   whatToHit:
     serializedVersion: 2
     m_Bits: 4294967035

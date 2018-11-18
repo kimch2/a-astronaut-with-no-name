@@ -11,7 +11,7 @@ public class StatusIndicator : MonoBehaviour {
 	{
 		if (healthBarRect == null)
 		{
-			Debug.LogError ("STATUS INDICATOR: No health bar object referenced!");
+			Debug.LogError ("No health bar object referenced!");
 		}
 	}
 

@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour {
 	public float cameraShakeAmount = .1f;
 	public float cameraShakeLength = .1f;
 	public float muzzleFlashLifeTime = 0.02f;
+	public string shootSound = "DefaultShoot";
 	public Transform bulletTrail;
 	public Transform hitPrefab;
 	public Transform muzzleFlash;
@@ -19,13 +20,14 @@ public class Gun : MonoBehaviour {
 	private float m_TimeToFire = 0;
 	private float m_TimeToSpawnEffect = 0;
 	private Transform m_FirePoint;
-
+    private AudioManager m_AudioManager;
+ 
     void Awake () 
 	{
 		m_FirePoint = transform.Find ("FirePoint");
 		if (!m_FirePoint) 
 		{
-			Debug.LogError ("GUN: Gun does not have a firepoint");
+			Debug.LogError ("Gun does not have a firepoint");
 		}
 	}
 
@@ -42,7 +44,15 @@ public class Gun : MonoBehaviour {
 				Shoot();
 			}
 		}
-	}
+
+        m_AudioManager = AudioManager.instance;
+
+        if (m_AudioManager == null)
+        {
+            Debug.LogError("No AudioManager in the scene");
+        }
+
+    }
 
 	void Shoot () 
 	{
@@ -108,6 +118,7 @@ public class Gun : MonoBehaviour {
 
 		Destroy(currentMuzzleFlash.gameObject, muzzleFlashLifeTime);
 
+        m_AudioManager.PlaySound(shootSound);
 		GameMaster.ShakeCamera (cameraShakeAmount, cameraShakeLength);
 	}
 }

@@ -16,15 +16,15 @@ public class WaveUI : MonoBehaviour {
 	void Start () 
 	{
 		if (m_Spawner == null) {
-			Debug.LogError("WAVEUI: No waveSpawner referenced!");
+			Debug.LogError("No waveSpawner referenced!");
 			this.enabled = false;
 		}
 		if (m_Animator == null) {
-			Debug.LogError("WAVEUI: No animator referenced!");
+			Debug.LogError("No animator referenced!");
 			this.enabled = false;
 		}
 		if (m_WaveText == null) {
-			Debug.LogError("WAVEUI: No waveText referenced!");
+			Debug.LogError("No waveText referenced!");
 			this.enabled = false;
 		}
 	}

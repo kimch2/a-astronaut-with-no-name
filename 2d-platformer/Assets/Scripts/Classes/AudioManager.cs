@@ -26,22 +26,32 @@ public class Sound {
         m_AudioSource = audioSource;
 	}
 
-	public void Play ()
+	public bool Play ()
 	{
-        m_AudioSource.clip = audioClip;
-		m_AudioSource.loop = loop;
-        m_AudioSource.volume = volume * (1 + Random.Range(-randomVolume / 2f, randomVolume / 2f));
-        m_AudioSource.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
-		m_AudioSource.Play();
+		if (m_AudioSource != null) 
+		{
+			m_AudioSource.clip = audioClip;
+			m_AudioSource.loop = loop;
+			m_AudioSource.volume = volume * (1 + Random.Range(-randomVolume / 2f, randomVolume / 2f));
+			m_AudioSource.pitch = pitch * (1 + Random.Range(-randomPitch / 2f, randomPitch / 2f));
+			m_AudioSource.Play();
+			return true;
+		}
+		return false;
 	}
 
-	public void Stop ()
+	public bool Stop ()
 	{
-		m_AudioSource.Stop();
+        if (m_AudioSource != null) 
+		{
+			m_AudioSource.Stop();
+			return true;
+		}
+		return false;
 	}
 }
 public class AudioManager : MonoBehaviour {
-	public static AudioManager audioManager;
+	public static AudioManager instance;
 
 	[SerializeField]
 	private Sound[] m_Sounds;
@@ -51,51 +61,46 @@ public class AudioManager : MonoBehaviour {
 	{
         m_Transform = transform;
 
-        if (audioManager != null)
+        if (instance != null && instance != this)
 		{
-			Debug.LogError("AUDIOMANAGER: more than one AudioManager in the scene.");
+			Destroy(this.gameObject);
 		}
 		else 
 		{
-            audioManager = this;
+            instance = this;
+			DontDestroyOnLoad(this.gameObject);
 		}
-	}
-
-	void Start ()
-	{
-		foreach (var sound in m_Sounds)
-		{
-			GameObject soundGameObject = new GameObject("Sound_" + sound.name);
+		
+		//TODO: check this
+        foreach (var sound in m_Sounds)
+        {
+            GameObject soundGameObject = new GameObject("Sound_" + sound.name);
             soundGameObject.transform.SetParent(m_Transform);
-			sound.SetSource(soundGameObject.AddComponent<AudioSource>());
-		}
+            sound.SetSource(soundGameObject.AddComponent<AudioSource>());
+        }
 	}
 
-	public static void PlaySound (string name)
+	public bool PlaySound (string name)
 	{
-		Debug.Log("AUDIOMANAGER: searching sound.");
-        foreach (var sound in audioManager.m_Sounds)
+        foreach (var sound in instance.m_Sounds)
         {
 			if (sound.name == name)
 			{
-				Debug.Log("AUDIOMANAGER: sound found.");
-				sound.Play();
-				return;
+				return sound.Play();
 			}
         }
-		Debug.LogWarning("AUDIOMANAGER: sound not found!");
+		return false;
 	}
-	public static void StopSound (string name)
+	public bool StopSound (string name)
 	{
-        foreach (var sound in audioManager.m_Sounds)
+        foreach (var sound in instance.m_Sounds)
         {
 			if (sound.name == name)
 			{
-				sound.Stop();
-				return;
+				return sound.Stop();
 			}
         }
-		Debug.LogWarning("AUDIOMANAGER: sound not found!");
+		return false;
 	}
 
 }

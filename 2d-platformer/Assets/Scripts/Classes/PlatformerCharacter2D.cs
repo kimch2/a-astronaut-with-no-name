@@ -5,11 +5,14 @@ namespace UnityStandardAssets._2D
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
+        public string landingSoundName = "LandingFootsteps";
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+
+        
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -20,6 +23,7 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
         private Transform m_PlayerGraphics;
+        private AudioManager m_AudioManager;
 
         private void Awake()
         {
@@ -32,9 +36,20 @@ namespace UnityStandardAssets._2D
             if (!m_PlayerGraphics) Debug.LogError("There is no 'Graphics' object on the player");
         }
 
+        private void Start ()
+        {
+            m_AudioManager = AudioManager.instance;
+            
+            if (m_AudioManager == null)
+            {
+                Debug.LogError("No AudioManager in the scene");
+            }
+        }
+
 
         private void FixedUpdate()
         {
+            bool wasGrounded = m_Grounded;
             m_Grounded = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -46,6 +61,11 @@ namespace UnityStandardAssets._2D
                     m_Grounded = true;
             }
             m_Anim.SetBool("Ground", m_Grounded);
+            
+            if (wasGrounded != m_Grounded && m_Grounded == true)
+            {
+                m_AudioManager.PlaySound(landingSoundName);
+            }
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
@@ -54,6 +74,7 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {

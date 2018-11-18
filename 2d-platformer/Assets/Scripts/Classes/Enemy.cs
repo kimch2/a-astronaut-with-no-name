@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
 
     public float cameraDeathShakeAmount = 0.1f;
     public float cameraDeathShakeLength = 0.1f;
+    public string deathSound = "Explosion";
     public Transform deathParticles;
     public Stats stats = new Stats();
 
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
     [SerializeField]
     private StatusIndicator statusIndicator;
     private Transform m_Transform;
+    private AudioManager m_AudioManager;
+    
 
     void Awake()
     {
@@ -44,7 +47,13 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
 
         if (deathParticles == null)
         {
-            Debug.LogError("ENEMY: No death particles!");
+            Debug.LogError("No death particles!");
+        }
+
+        m_AudioManager = AudioManager.instance;
+        if (m_AudioManager == null)
+        {
+            Debug.LogError("No AudioManager in the scene");
         }
     }
 
@@ -62,6 +71,7 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
     
     public void Kill ()
     {
+        m_AudioManager.PlaySound(deathSound);
         Transform currentDeathParticle = (Transform) Instantiate (deathParticles, m_Transform.position, Quaternion.identity);
         Destroy(currentDeathParticle.gameObject, 1f);
         GameMaster.ShakeCamera(cameraDeathShakeAmount, cameraDeathShakeLength);
