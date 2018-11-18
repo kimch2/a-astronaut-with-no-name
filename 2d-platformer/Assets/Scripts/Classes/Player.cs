@@ -54,7 +54,7 @@ public class Player : MonoBehaviour, IDamageable<int> {
 	public void Kill() 
     {
         Destroy(gameObject);
-        GameMaster.SpawnPlayer();
+        GameMaster.GameOver();
 	}
 
     void setHealthStatus()

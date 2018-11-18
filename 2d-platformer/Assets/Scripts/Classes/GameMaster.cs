@@ -9,6 +9,9 @@ public class GameMaster : MonoBehaviour {
 	public static GameMaster gameMaster;
 	private static CameraShake m_CameraShake;
 
+	[SerializeField]
+	private GameObject m_GameOverUI;
+
     void Awake () 
 	{
 		if (!gameMaster) 
@@ -21,9 +24,9 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
-	public static void SpawnPlayer () 
+	public static void GameOver ()
 	{
-		Instantiate (gameMaster.playerPrefab, gameMaster.spawnPoint.position, gameMaster.spawnPoint.rotation);
+		gameMaster.m_GameOverUI.SetActive(true);
 	}
 
 	public static void ShakeCamera (float amount, float length)
