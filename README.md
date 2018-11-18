@@ -9,4 +9,4 @@ A 2D platformer shooter made in [Unity](https://unity3d.com).
   - [A* Pathfinding Project](https://arongranberg.com/astar)
 
 ### Special Thanks ###
-  - [Brackeys Youtube Channel](https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA)
+  - [Brackeys youtube channel](https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA)
