@@ -24,9 +24,15 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
+	void Start ()
+	{
+        AudioManager.PlaySound("Soundtrack");
+	}
+
 	public static void GameOver ()
 	{
 		gameMaster.m_GameOverUI.SetActive(true);
+        AudioManager.StopSound("Soundtrack");
 	}
 
 	public static void ShakeCamera (float amount, float length)

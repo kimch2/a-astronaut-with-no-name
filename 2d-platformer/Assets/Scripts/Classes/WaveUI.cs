@@ -12,7 +12,6 @@ public class WaveUI : MonoBehaviour {
     [SerializeField]
 	private Text m_WaveText;
 
-	private WaveSpawner.SpawnState m_PreviousState;
 
 	void Start () 
 	{
@@ -33,7 +32,6 @@ public class WaveUI : MonoBehaviour {
 	void Update () 
 	{
 		UpdateIncomingUI();
-        m_PreviousState = m_Spawner.state;
 	}
 
 	void UpdateIncomingUI ()
