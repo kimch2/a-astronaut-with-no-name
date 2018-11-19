@@ -21,6 +21,7 @@ public class Gun : MonoBehaviour {
 	private float m_TimeToSpawnEffect = 0;
 	private Transform m_FirePoint;
     private AudioManager m_AudioManager;
+    private GameMaster m_GameMaster;
  
     void Awake () 
 	{
@@ -29,6 +30,17 @@ public class Gun : MonoBehaviour {
 		{
 			Debug.LogError ("Gun does not have a firepoint");
 		}
+	}
+
+	void Start()
+	{
+        m_GameMaster = GameMaster.instance;
+        if (m_GameMaster == null)
+        {
+            Debug.LogError("No GameMaster in the scene");
+        }
+
+        m_GameMaster.onPause += OnPause;
 	}
 
 	void Update () 
@@ -52,6 +64,11 @@ public class Gun : MonoBehaviour {
             Debug.LogError("No AudioManager in the scene");
         }
 
+    }
+
+    void OnPause(bool active)
+    {
+        this.enabled = !active;
     }
 
 	void Shoot () 
@@ -119,6 +136,6 @@ public class Gun : MonoBehaviour {
 		Destroy(currentMuzzleFlash.gameObject, muzzleFlashLifeTime);
 
         m_AudioManager.PlaySound(shootSound);
-		GameMaster.ShakeCamera (cameraShakeAmount, cameraShakeLength);
+        m_GameMaster.ShakeCamera (cameraShakeAmount, cameraShakeLength);
 	}
 }

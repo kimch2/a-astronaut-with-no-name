@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
 
+	public float money;
+	public string mainLevelSoundtrackName = "MainLevelSoundtrack";
 	public Transform playerPrefab;
 	public Transform spawnPoint;
 	public static GameMaster instance;
-	private static CameraShake m_CameraShake;
+	public delegate void PauseCallback(bool active);
+	public PauseCallback onPause;
 
-	[SerializeField]
-	private GameObject m_GameOverUI;
     private AudioManager m_AudioManager;
+	private CameraShake m_CameraShake;
+	[SerializeField] private GameObject m_UpgradeMenu;
+	[SerializeField] private GameObject m_GameOverUI;
+	[SerializeField] private GameObject m_OnGameUI;
+	[SerializeField] private float m_StartingMoney = 100f;
 	
+
     void Awake () 
 	{
 		if (!instance) 
@@ -33,17 +40,35 @@ public class GameMaster : MonoBehaviour {
         {
             Debug.LogError("No AudioManager in the scene");
         }
-        m_AudioManager.PlaySound("MainLevelSoundtrack");
+        m_AudioManager.PlaySound(mainLevelSoundtrackName);
+		
+		money = m_StartingMoney;
 	}
 
-	public static void GameOver ()
+	void Update ()
+	{
+		//TODO: don't hardcode this
+		if (Input.GetKeyDown(KeyCode.U))
+		{
+            ToggleUpgradeMenu();
+		}
+	}
+
+	private void ToggleUpgradeMenu ()
+	{
+        m_UpgradeMenu.SetActive(!m_UpgradeMenu.activeSelf);
+        m_OnGameUI.SetActive(!m_UpgradeMenu.activeSelf);
+        onPause.Invoke(m_UpgradeMenu.activeSelf);
+	}
+
+	public void GameOver ()
 	{
 		instance.m_GameOverUI.SetActive(true);
-        instance.m_AudioManager.StopSound("MainLevelSoundtrack");
+        instance.m_AudioManager.StopSound(instance.mainLevelSoundtrackName);
 	}
 
-	public static void ShakeCamera (float amount, float length)
+	public void ShakeCamera (float amount, float length)
 	{
-		m_CameraShake.Shake (amount, length);
+        m_CameraShake.Shake (amount, length);
 	}
 }

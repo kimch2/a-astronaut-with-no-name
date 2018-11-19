@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce32bb6d05d0ad468c38cca0bd898ac, type: 3}
   m_Name: 
@@ -135,7 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1781205cb6a44ad47a726212e0278144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
+  mainLevelSoundtrackName: MainLevelSoundtrack
   playerPrefab: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c,
     type: 2}
   spawnPoint: {fileID: 4322780629142818}
+  m_UpgradeMenu: {fileID: 0}
   m_GameOverUI: {fileID: 0}
+  m_StartingMoney: 100

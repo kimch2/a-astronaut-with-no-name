@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDeathShakeAmount: 0.1
   cameraDeathShakeLength: 0.1
+  deathSound: Explosion
   deathParticles: {fileID: 4946414318175844, guid: e3438a4e312aeaa4cb670d6f57e90c48,
     type: 2}
   stats:

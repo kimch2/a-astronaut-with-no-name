@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IDamageable<int> {
 
     [System.Serializable]
@@ -33,11 +34,14 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
     private StatusIndicator statusIndicator;
     private Transform m_Transform;
     private AudioManager m_AudioManager;
+    private GameMaster m_GameMaster;
+    private Rigidbody2D m_RigidBody;
     
 
     void Awake()
     {
         m_Transform = transform;
+        m_RigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Start ()
@@ -55,6 +59,13 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
         {
             Debug.LogError("No AudioManager in the scene");
         }
+
+        m_GameMaster = GameMaster.instance;
+        if (m_GameMaster == null)
+        {
+            Debug.LogError("No GameMaster in the scene");
+        }
+        m_GameMaster.onPause += OnPause;
     }
 
     public void Damage (int damage)
@@ -68,13 +79,29 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
             Kill();
         }
     }
-    
+
+    void OnPause(bool active)
+    {
+        if (m_RigidBody != null)
+        {
+            if (active)
+            {
+                m_RigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+            else
+            {
+                m_RigidBody.constraints = RigidbodyConstraints2D.None;
+                m_RigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+        }
+    }
+
     public void Kill ()
     {
         m_AudioManager.PlaySound(deathSound);
         Transform currentDeathParticle = (Transform) Instantiate (deathParticles, m_Transform.position, Quaternion.identity);
         Destroy(currentDeathParticle.gameObject, 1f);
-        GameMaster.ShakeCamera(cameraDeathShakeAmount, cameraDeathShakeLength);
+        m_GameMaster.ShakeCamera(cameraDeathShakeAmount, cameraDeathShakeLength);
         Destroy(gameObject);
     }
 

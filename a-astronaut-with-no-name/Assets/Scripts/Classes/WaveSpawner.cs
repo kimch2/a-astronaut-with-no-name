@@ -36,7 +36,10 @@ public class WaveSpawner : MonoBehaviour {
 	private int m_NextWave = 0;
 	private float m_WaveCountdown;
 	private float m_SearchCountdown = 1f;
+	private bool m_AllowToSpawnEnemy = true;
 	private SpawnState m_State = SpawnState.COUNTING;
+    private GameMaster m_GameMaster;
+
 
 	void Start()
 	{
@@ -46,6 +49,14 @@ public class WaveSpawner : MonoBehaviour {
 		}
 
 		m_WaveCountdown = timeBetweenWaves;
+
+        m_GameMaster = GameMaster.instance;
+        if (m_GameMaster == null)
+        {
+            Debug.LogError("No GameMaster in the scene");
+        }
+
+        m_GameMaster.onPause += OnPause;
 	}
 
 	void Update()
@@ -75,6 +86,11 @@ public class WaveSpawner : MonoBehaviour {
 		}
 	}
 
+    void OnPause(bool active)
+    {
+        m_AllowToSpawnEnemy = !active;
+    }
+	
 	void WaveCompleted()
 	{
 		Debug.Log("Wave Completed!");
@@ -107,15 +123,16 @@ public class WaveSpawner : MonoBehaviour {
 		return true;
 	}
 
-	IEnumerator SpawnWave(Wave _wave)
+	IEnumerator SpawnWave(Wave wave)
 	{
-		Debug.Log("Spawning Wave: " + _wave.name);
+		Debug.Log("Spawning Wave: " + wave.name);
 		m_State = SpawnState.SPAWNING;
 
-		for (int i = 0; i < _wave.count; i++)
+		for (int i = 0; i < wave.count; i++)
 		{
-			SpawnEnemy(_wave.enemy);
-			yield return new WaitForSeconds( 1f/_wave.rate );
+            yield return new WaitUntil(() => m_AllowToSpawnEnemy);
+			SpawnEnemy(wave.enemy);
+			yield return new WaitForSeconds( 1f/wave.rate );
 		}
 
 		m_State = SpawnState.WAITING;
@@ -123,12 +140,10 @@ public class WaveSpawner : MonoBehaviour {
 		yield break;
 	}
 
-	void SpawnEnemy(Transform _enemy)
+	void SpawnEnemy(Transform enemy)
 	{
-		Debug.Log("Spawning Enemy: " + _enemy.name);
-
-		Transform _sp = spawnPoints[ Random.Range (0, spawnPoints.Length) ];
-		Instantiate(_enemy, _sp.position, _sp.rotation);
+		Transform randomSpawnPoint = spawnPoints[ Random.Range (0, spawnPoints.Length) ];
+		Instantiate(enemy, randomSpawnPoint.position, randomSpawnPoint.rotation);
 	}
 
 }

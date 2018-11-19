@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour, IDamageable<int> {
 
 	[System.Serializable]
@@ -25,10 +25,16 @@ public class Player : MonoBehaviour, IDamageable<int> {
     public string deathSoundVoice = "DeathVoice";
 	public Stats stats = new Stats();
 
-    [Header("Optional: ")]
-    [SerializeField]
-    private StatusIndicator statusIndicator;
+    [Header("Optional: ")] 
+    [SerializeField] private StatusIndicator statusIndicator;
     private AudioManager m_AudioManager;
+    private GameMaster m_GameMaster;
+    private Rigidbody2D m_RigidBody;
+
+    void Awake ()
+    {
+        m_RigidBody = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -40,6 +46,14 @@ public class Player : MonoBehaviour, IDamageable<int> {
         {
             Debug.LogError("No AudioManager in the scene");
         }
+
+        m_GameMaster = GameMaster.instance;
+        if (m_GameMaster == null)
+        {
+            Debug.LogError("No GameMaster in the scene");
+        }
+
+        m_GameMaster.onPause += OnPause;
     }
 
     void Update () 
@@ -49,7 +63,24 @@ public class Player : MonoBehaviour, IDamageable<int> {
 		}
 	}
 
-	public void Damage (int damage) 
+    void OnPause(bool active)
+    {
+        if (m_RigidBody != null)
+        {
+            if (active)
+            {
+                m_RigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+            else 
+            {
+                m_RigidBody.constraints = RigidbodyConstraints2D.None;
+                m_RigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
+        }
+    }
+
+
+    public void Damage (int damage) 
     {
         stats.currentHealth -= damage;
 
@@ -63,7 +94,7 @@ public class Player : MonoBehaviour, IDamageable<int> {
     {
         m_AudioManager.PlaySound(deathSoundVoice);
         Destroy(gameObject);
-        GameMaster.GameOver();
+        m_GameMaster.GameOver();
 	}
 
     void setHealthStatus()

@@ -71,7 +71,7 @@ public class AudioManager : MonoBehaviour {
 			DontDestroyOnLoad(this.gameObject);
 		}
 		
-		//TODO: check this
+		//TODO: find better solution to this
         foreach (var sound in m_Sounds)
         {
             GameObject soundGameObject = new GameObject("Sound_" + sound.name);
