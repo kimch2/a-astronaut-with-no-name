@@ -7,8 +7,6 @@ public class PlayerStats : MonoBehaviour {
     public int healthRegenerateAmount = 1;
    	public float maxSpeed = 10f;                    
    	public float jumpForce = 600f;   
-    public float weaponDamageMultiplier = 1f;            
-    public float weaponFireRateMultiplier = 1f;            
     public static PlayerStats instance;
     public int currentHealth
     {

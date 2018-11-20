@@ -101,8 +101,11 @@ public class WaveSpawner : MonoBehaviour {
 		m_State = SpawnState.COUNTING;
 		m_WaveCountdown = timeBetweenWaves;
 
+        Enemy nextEnemy = m_Waves[m_CurrentWave].enemy.GetComponent<Enemy>();
+        nextEnemy.xpGain = (int) (nextEnemy.xpGain * waveDifficultyIncreaseRate);
+		
 		Wave wave = new Wave {
-			enemy = m_Waves[m_CurrentWave].enemy,
+			enemy = nextEnemy.transform,
 			rate = m_Waves[m_CurrentWave].rate * waveDifficultyIncreaseRate,
 			count = (int) (m_Waves[m_CurrentWave].count * waveDifficultyIncreaseRate)
 		};

@@ -22,7 +22,6 @@ public class Gun : MonoBehaviour {
 	private Transform m_FirePoint;
     private AudioManager m_AudioManager;
     private GameMaster m_GameMaster;
-    private PlayerStats m_PlayerStats;
  
     void Awake () 
 	{
@@ -35,12 +34,6 @@ public class Gun : MonoBehaviour {
 
 	void Start()
 	{
-        m_PlayerStats = PlayerStats.instance;
-        if (m_PlayerStats == null)
-        {
-            Debug.LogError("No PlayerStats in the scene");
-        }
-		
         m_GameMaster = GameMaster.instance;
         if (m_GameMaster == null)
         {
@@ -59,7 +52,7 @@ public class Gun : MonoBehaviour {
 		else 
 		{
             if (Input.GetButton ("Fire1") && Time.time > m_TimeToFire) {
-				m_TimeToFire = Time.time + 1 / (fireRate * m_PlayerStats.weaponFireRateMultiplier);
+				m_TimeToFire = Time.time + 1 / fireRate;
 				Shoot();
 			}
 		}
@@ -90,7 +83,7 @@ public class Gun : MonoBehaviour {
             IDamageable<int> hitTarget = hit.collider.GetComponent<IDamageable<int>>();
 			if (hitTarget != null) 
 			{
-                hitTarget.Damage ((int) (damage * m_PlayerStats.weaponDamageMultiplier));
+                hitTarget.Damage (damage);
 			}
 		}
 
