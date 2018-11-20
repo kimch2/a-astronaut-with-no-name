@@ -1,5 +1,5 @@
 # A Astronaut With No Name
-A 2D platformer shooter made in [Unity](https://unity3d.com). 
+A 2D platformer shooter prototype made in [Unity](https://unity3d.com). 
 
 ### Using  ###
   - Unity v2017.1.1f1 Personal.
