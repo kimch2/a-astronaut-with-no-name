@@ -4,7 +4,7 @@ A 2D platformer shooter prototype made in [Unity](https://unity3d.com).
 [PLAY HERE](https://felipevideira.itch.io/a-astronaut-with-no-name)
 
 ### How To Play ###
- - <kbd>w</kbd> <kbd>s</kbd> <kbd>a</kbd> <kbd>a</kbd> to move.
+ - <kbd>a</kbd> <kbd>d</kbd> to move.
  - <kbd>space</kbd> to jump.
  - <kbd>u</kbd> to open the upgrade character menu.
  - use the mouse to aim and the mouse left button to shoot.
