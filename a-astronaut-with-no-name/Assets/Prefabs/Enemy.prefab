@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980baf53d3b6db34bb3241198a6c6765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpDrop: 10
   cameraDeathShakeAmount: 0.1
   cameraDeathShakeLength: 0.1
   deathSound: Explosion
@@ -162,7 +163,7 @@ MonoBehaviour:
     type: 2}
   stats:
     maxHealth: 100
-    damage: 100
+    damage: 80
   statusIndicator: {fileID: 114714496277882144}
 --- !u!114 &114381219476724376
 MonoBehaviour:

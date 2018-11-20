@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour {
 	}
 
 	public float timeBetweenWaves = 5f;
+	public int WaveCompletedXpDrop = 5;
     public Transform[] spawnPoints;
 	public Wave initialWave;
 	public float waveDifficultyIncreaseRate;
@@ -101,13 +102,12 @@ public class WaveSpawner : MonoBehaviour {
 		m_State = SpawnState.COUNTING;
 		m_WaveCountdown = timeBetweenWaves;
 
-        Enemy nextEnemy = m_Waves[m_CurrentWave].enemy.GetComponent<Enemy>();
-        nextEnemy.xpGain = (int) (nextEnemy.xpGain * waveDifficultyIncreaseRate);
-		
+		m_GameMaster.AddXP((int) (WaveCompletedXpDrop * waveDifficultyIncreaseRate));
+
 		Wave wave = new Wave {
-			enemy = nextEnemy.transform,
+			enemy = m_Waves[m_CurrentWave].enemy,
 			rate = m_Waves[m_CurrentWave].rate * waveDifficultyIncreaseRate,
-			count = (int) (m_Waves[m_CurrentWave].count * waveDifficultyIncreaseRate)
+			count = (int) (m_Waves[m_CurrentWave].count + waveDifficultyIncreaseRate)
 		};
 
         m_Waves.Add(wave);

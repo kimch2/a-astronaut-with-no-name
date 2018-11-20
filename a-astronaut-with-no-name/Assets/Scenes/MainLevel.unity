@@ -115,11 +115,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4233404928530808, guid: abea8d28057412f448e8e787cd060622, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -151,66 +146,6 @@ Prefab:
     - target: {fileID: 4233404928530808, guid: abea8d28057412f448e8e787cd060622, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].name
-      value: BonusSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 51d6d5ff80a863745bdfa59cb4174937, type: 3}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].randomVolume
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[8].randomPitch
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].name
-      value: EmptyClickSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c35dd35992454154e8453bb05d1f5db6, type: 3}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].randomVolume
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114132025915324968, guid: abea8d28057412f448e8e787cd060622,
-        type: 2}
-      propertyPath: m_Sounds.Array.data[9].randomPitch
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abea8d28057412f448e8e787cd060622, type: 2}
@@ -2838,9 +2773,9 @@ MonoBehaviour:
   jumpIncreasePerUpgrade: 100
   speedIncreasePerUpgrade: 1
   healthIncreasePerUpgrade: 10
-  jumpCostPerUpgrade: 35
-  speedCostPerUpgrade: 20
-  healthCostPerUpgrade: 30
+  jumpCostPerUpgrade: 50
+  speedCostPerUpgrade: 25
+  healthCostPerUpgrade: 75
   pressButtonSound: BonusSound
   noXPButtonSound: EmptyClickSound
   hoverButtonSound: HoverButtonSound
