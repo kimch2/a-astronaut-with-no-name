@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
 
-	public float money;
 	public string mainLevelSoundtrackName = "MainLevelSoundtrack";
 	public Transform playerPrefab;
 	public Transform spawnPoint;
 	public static GameMaster instance;
 	public delegate void PauseCallback(bool active);
 	public PauseCallback onPause;
+	public int xp 
+	{
+		get { return m_Xp; }
+	}
 
     private AudioManager m_AudioManager;
 	private CameraShake m_CameraShake;
+    [SerializeField] private int m_Xp;
 	[SerializeField] private GameObject m_UpgradeMenu;
 	[SerializeField] private GameObject m_GameOverUI;
 	[SerializeField] private GameObject m_OnGameUI;
-	[SerializeField] private float m_StartingMoney = 100f;
+	[SerializeField] private int m_StartingXp = 0;
 	
 
     void Awake () 
@@ -41,8 +45,8 @@ public class GameMaster : MonoBehaviour {
             Debug.LogError("No AudioManager in the scene");
         }
         m_AudioManager.PlaySound(mainLevelSoundtrackName);
-		
-		money = m_StartingMoney;
+
+        m_Xp = m_StartingXp;
 	}
 
 	void Update ()
@@ -61,9 +65,20 @@ public class GameMaster : MonoBehaviour {
         onPause.Invoke(m_UpgradeMenu.activeSelf);
 	}
 
+	public void AddXP(int amount)
+	{
+        m_Xp += amount;
+	}
+
+	public void SubtractXP(int amount)
+	{
+        m_Xp -= amount;
+	}
+
 	public void GameOver ()
 	{
 		instance.m_GameOverUI.SetActive(true);
+        m_OnGameUI.SetActive(false);
         instance.m_AudioManager.StopSound(instance.mainLevelSoundtrackName);
 	}
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WaveSpawner : MonoBehaviour {
 
@@ -8,19 +9,19 @@ public class WaveSpawner : MonoBehaviour {
 	[System.Serializable]
 	public class Wave
 	{
-		public string name;
 		public Transform enemy;
 		public int count;
 		public float rate;
 	}
 
 	public float timeBetweenWaves = 5f;
-    public Wave[] waves;
     public Transform[] spawnPoints;
+	public Wave initialWave;
+	public float waveDifficultyIncreaseRate;
 
-	public int nextWave
+	public int currentWave
 	{
-		get { return m_NextWave + 1; }
+		get { return m_CurrentWave + 1; }
 	}
 
 	public float waveCountdown
@@ -33,10 +34,11 @@ public class WaveSpawner : MonoBehaviour {
 		get { return m_State; }
 	}
 
-	private int m_NextWave = 0;
+	private int m_CurrentWave = 0;
 	private float m_WaveCountdown;
 	private float m_SearchCountdown = 1f;
 	private bool m_AllowToSpawnEnemy = true;
+    private List<Wave> m_Waves = new List<Wave>();
 	private SpawnState m_State = SpawnState.COUNTING;
     private GameMaster m_GameMaster;
 
@@ -57,6 +59,9 @@ public class WaveSpawner : MonoBehaviour {
         }
 
         m_GameMaster.onPause += OnPause;
+
+		m_Waves.Add(initialWave);
+
 	}
 
 	void Update()
@@ -77,7 +82,7 @@ public class WaveSpawner : MonoBehaviour {
 		{
 			if (m_State != SpawnState.SPAWNING)
 			{
-				StartCoroutine( SpawnWave ( waves[m_NextWave] ) );
+				StartCoroutine(SpawnWave(m_Waves[m_CurrentWave]));
 			}
 		}
 		else
@@ -93,20 +98,18 @@ public class WaveSpawner : MonoBehaviour {
 	
 	void WaveCompleted()
 	{
-		Debug.Log("Wave Completed!");
-
 		m_State = SpawnState.COUNTING;
 		m_WaveCountdown = timeBetweenWaves;
 
-		if (m_NextWave + 1 > waves.Length - 1)
-		{
-			m_NextWave = 0;
-			Debug.Log("ALL WAVES COMPLETE! Looping...");
-		}
-		else
-		{
-			m_NextWave++;
-		}
+		Wave wave = new Wave {
+			enemy = m_Waves[m_CurrentWave].enemy,
+			rate = m_Waves[m_CurrentWave].rate * waveDifficultyIncreaseRate,
+			count = (int) (m_Waves[m_CurrentWave].count * waveDifficultyIncreaseRate)
+		};
+
+        m_Waves.Add(wave);
+		m_CurrentWave++;
+		
 	}
 
 	bool EnemyIsAlive()
@@ -125,7 +128,6 @@ public class WaveSpawner : MonoBehaviour {
 
 	IEnumerator SpawnWave(Wave wave)
 	{
-		Debug.Log("Spawning Wave: " + wave.name);
 		m_State = SpawnState.SPAWNING;
 
 		for (int i = 0; i < wave.count; i++)

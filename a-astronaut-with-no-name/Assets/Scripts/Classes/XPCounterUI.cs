@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
-public class MoneyCounterUI : MonoBehaviour {
+public class XPCounterUI : MonoBehaviour {
 
     private GameMaster m_GameMaster;
 	private Text moneyText;
@@ -24,6 +24,6 @@ public class MoneyCounterUI : MonoBehaviour {
 
     void Update()
     {
-		moneyText.text = "MONEY: " + m_GameMaster.money.ToString();
+		moneyText.text = "XP: " + m_GameMaster.xp.ToString();
     }
 }

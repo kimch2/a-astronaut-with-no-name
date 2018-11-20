@@ -5,13 +5,9 @@ using UnityEngine;
 public class PlatformerCharacter2D : MonoBehaviour
 {
     public string landingSoundName = "LandingFootsteps";
-    [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-    [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
-
-    
 
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -23,6 +19,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Transform m_PlayerGraphics;
     private AudioManager m_AudioManager;
+    private PlayerStats m_PlayerStats;
 
     private void Awake()
     {
@@ -42,6 +39,13 @@ public class PlatformerCharacter2D : MonoBehaviour
         if (m_AudioManager == null)
         {
             Debug.LogError("No AudioManager in the scene");
+        }
+
+        m_PlayerStats = PlayerStats.instance;
+        
+        if (m_PlayerStats == null)
+        {
+            Debug.LogError("No PlayerStats in the scene");
         }
     }
 
@@ -97,7 +101,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
             // Move the character
-            m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+            m_Rigidbody2D.velocity = new Vector2(move * m_PlayerStats.maxSpeed, m_Rigidbody2D.velocity.y);
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -118,7 +122,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             // Add a vertical force to the player.
             m_Grounded = false;
             m_Anim.SetBool("Ground", false);
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_PlayerStats.jumpForce));
         }
     }
 

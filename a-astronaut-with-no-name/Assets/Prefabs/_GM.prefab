@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114995490942516682}
   - component: {fileID: 114917569533165224}
   - component: {fileID: 114016956443845470}
+  - component: {fileID: 114137787580245914}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GM
@@ -84,19 +85,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 5
-  waves:
-  - name: Easy
-    enemy: {fileID: 4989616563938844, guid: a34810c483809dd41b7b885541c16483, type: 2}
-    count: 5
-    rate: 1
-  - name: Medium
-    enemy: {fileID: 4989616563938844, guid: a34810c483809dd41b7b885541c16483, type: 2}
-    count: 10
-    rate: 0.5
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  initialWave:
+    enemy: {fileID: 4989616563938844, guid: a34810c483809dd41b7b885541c16483, type: 2}
+    count: 5
+    rate: 1
+  waveDifficultyIncreaseRate: 1.2
+--- !u!114 &114137787580245914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344406847518466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad5c5ed5364e374db8839748d0efd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthRegenerateRate: 2
+  healthRegenerateAmount: 1
+  maxSpeed: 10
+  jumpForce: 500
+  weaponDamageMultiplier: 1
+  weaponFireRateMultiplier: 1
 --- !u!114 &114327863058121732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,7 +126,7 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 0}
   - {fileID: 0}
-  smoothing: 0.5
+  smoothing: 0.75
 --- !u!114 &114917569533165224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,11 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1781205cb6a44ad47a726212e0278144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
+  xp: 0
   mainLevelSoundtrackName: MainLevelSoundtrack
   playerPrefab: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c,
     type: 2}
   spawnPoint: {fileID: 4322780629142818}
   m_UpgradeMenu: {fileID: 0}
   m_GameOverUI: {fileID: 0}
-  m_StartingMoney: 100
+  m_OnGameUI: {fileID: 0}
+  m_StartingXp: 0

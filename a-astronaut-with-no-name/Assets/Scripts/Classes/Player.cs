@@ -1,34 +1,18 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour, IDamageable<int> {
 
-	[System.Serializable]
-	public class Stats {
-        public int maxHealth = 100;
-        public int currentHealth
-        {
-            get { return m_CurrentHealth; }
-            set { m_CurrentHealth = Mathf.Clamp(value, 0, maxHealth); }
-        }
-
-        private int m_CurrentHealth;
-
-        public void Init()
-        {
-            currentHealth = maxHealth;
-        }
-    }
-
 	public int fallBoundary = -20;
     public string deathSoundVoice = "DeathVoice";
-	public Stats stats = new Stats();
 
     [Header("Optional: ")] 
     [SerializeField] private StatusIndicator statusIndicator;
     private AudioManager m_AudioManager;
     private GameMaster m_GameMaster;
+    private PlayerStats m_PlayerStats;
     private Rigidbody2D m_RigidBody;
 
     void Awake ()
@@ -38,22 +22,20 @@ public class Player : MonoBehaviour, IDamageable<int> {
 
     void Start()
     {
-        stats.Init();
-        setHealthStatus();
-        
-        m_AudioManager = AudioManager.instance;
-        if (m_AudioManager == null)
-        {
-            Debug.LogError("No AudioManager in the scene");
-        }
-
         m_GameMaster = GameMaster.instance;
-        if (m_GameMaster == null)
-        {
-            Debug.LogError("No GameMaster in the scene");
-        }
-
+        if (m_GameMaster == null) Debug.LogError("No GameMaster in the scene");
         m_GameMaster.onPause += OnPause;
+
+        m_AudioManager = AudioManager.instance;
+        if (m_AudioManager == null) Debug.LogError("No AudioManager in the scene");
+
+        m_PlayerStats = PlayerStats.instance;
+
+        if (m_PlayerStats == null) Debug.LogError("No PlayerStats in the scene");
+
+        setHealthStatus();
+
+        InvokeRepeating("Heal", 1f/m_PlayerStats.healthRegenerateRate, 1f/m_PlayerStats.healthRegenerateRate);
     }
 
     void Update () 
@@ -82,13 +64,19 @@ public class Player : MonoBehaviour, IDamageable<int> {
 
     public void Damage (int damage) 
     {
-        stats.currentHealth -= damage;
+        m_PlayerStats.currentHealth -= damage;
 
 		setHealthStatus();
-		if (stats.currentHealth <= 0) {
+		if (m_PlayerStats.currentHealth <= 0) {
 			Kill();
 		}
 	}
+
+    void Heal()
+    {
+        m_PlayerStats.currentHealth += m_PlayerStats.healthRegenerateAmount;
+        setHealthStatus();
+    }
 
 	public void Kill() 
     {
@@ -101,7 +89,7 @@ public class Player : MonoBehaviour, IDamageable<int> {
     {
         if (statusIndicator != null)
         {
-            statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
+            statusIndicator.SetHealth(m_PlayerStats.currentHealth, m_PlayerStats.maxHealth);
         }
     }
 	

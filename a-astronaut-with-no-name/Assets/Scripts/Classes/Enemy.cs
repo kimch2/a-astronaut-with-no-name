@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
         } 
     }
 
+    public int xpGain = 10;
     public float cameraDeathShakeAmount = 0.1f;
     public float cameraDeathShakeLength = 0.1f;
     public string deathSound = "Explosion";
@@ -99,9 +100,13 @@ public class Enemy : MonoBehaviour, IDamageable<int> {
     public void Kill ()
     {
         m_AudioManager.PlaySound(deathSound);
+
         Transform currentDeathParticle = (Transform) Instantiate (deathParticles, m_Transform.position, Quaternion.identity);
         Destroy(currentDeathParticle.gameObject, 1f);
+
+        m_GameMaster.AddXP(xpGain);
         m_GameMaster.ShakeCamera(cameraDeathShakeAmount, cameraDeathShakeLength);
+
         Destroy(gameObject);
     }
 
