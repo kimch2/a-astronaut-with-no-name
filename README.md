@@ -1,7 +1,7 @@
 # A Astronaut With No Name
 A 2D platformer shooter prototype made in [Unity](https://unity3d.com). 
 
-[PLAY HERE](https://felipevideira.itch.io/a-astronaut-with-no-name)
+[PLAY HERE](https://felipevideira.itch.io/a-astronaut-with-no-name) (works better on Firefox)
 
 ### How To Play ###
  - <kbd>a</kbd> <kbd>d</kbd> to move.
