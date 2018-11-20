@@ -19,9 +19,8 @@ public class GameOverUI : MonoBehaviour {
 
 	public void Exit () 
 	{
-		Debug.Log("APPLICATION QUIT!");
         displayButtonPressSound();
-		Application.Quit();	
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 	}
 	
 	public void Retry () 

@@ -20,16 +20,11 @@ public class Menu : MonoBehaviour {
 
 	public void Play () 
 	{
-        displayButtonPressSound();
-        m_AudioManager.StopSound("MenuSoundtrack");
+		displayButtonPressSound();
+		m_AudioManager.StopSound("MenuSoundtrack");
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 	
-	public void Exit () 
-	{
-        displayButtonPressSound();
-		Application.Quit();
-	}
 
 	public void OnMouseEnter()
 	{
