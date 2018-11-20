@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1764790801581764}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1764790801581764
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4233404928530808}
   - component: {fileID: 114132025915324968}
@@ -30,10 +30,10 @@ GameObject:
 --- !u!4 &4233404928530808
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764790801581764}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -43,7 +43,7 @@ Transform:
 --- !u!114 &114132025915324968
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764790801581764}
   m_Enabled: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
     randomVolume: 0.25
     randomPitch: 0.25
   - name: MainLevelSoundtrack
-    audioClip: {fileID: 8300000, guid: 781b602938546d34a9027eb8b07c89e1, type: 3}
+    audioClip: {fileID: 8300000, guid: 9fd08dc861d8ec747986be6f96377d52, type: 3}
     loop: 1
     volume: 0.4
     pitch: 1

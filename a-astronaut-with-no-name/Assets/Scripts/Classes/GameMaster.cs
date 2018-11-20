@@ -15,9 +15,9 @@ public class GameMaster : MonoBehaviour {
 		get { return m_Xp; }
 	}
 
-    private AudioManager m_AudioManager;
+   	 private AudioManager m_AudioManager;
 	private CameraShake m_CameraShake;
-    [SerializeField] private int m_Xp;
+    	[SerializeField] private int m_Xp;
 	[SerializeField] private GameObject m_UpgradeMenu;
 	[SerializeField] private GameObject m_GameOverUI;
 	[SerializeField] private GameObject m_OnGameUI;
@@ -52,9 +52,9 @@ public class GameMaster : MonoBehaviour {
 	void Update ()
 	{
 		//TODO: don't hardcode this
-		if (Input.GetKeyDown(KeyCode.U))
+		if (Input.GetKeyDown(KeyCode.U) && !instance.m_GameOverUI.activeSelf)
 		{
-            ToggleUpgradeMenu();
+			ToggleUpgradeMenu();
 		}
 	}
 

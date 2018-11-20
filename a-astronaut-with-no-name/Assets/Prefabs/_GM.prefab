@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1344406847518466}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1003955664498156
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4322780629142818}
   m_Layer: 0
@@ -29,9 +29,9 @@ GameObject:
 --- !u!1 &1344406847518466
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4278475016608114}
   - component: {fileID: 114327863058121732}
@@ -49,7 +49,7 @@ GameObject:
 --- !u!4 &4278475016608114
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -63,7 +63,7 @@ Transform:
 --- !u!4 &4322780629142818
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1003955664498156}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
@@ -76,7 +76,7 @@ Transform:
 --- !u!114 &114016956443845470
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_Enabled: 1
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 5
+  WaveCompletedXpDrop: 5
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -93,11 +94,11 @@ MonoBehaviour:
     enemy: {fileID: 4989616563938844, guid: a34810c483809dd41b7b885541c16483, type: 2}
     count: 5
     rate: 1
-  waveDifficultyIncreaseRate: 1.2
+  waveDifficultyIncreaseRate: 1.15
 --- !u!114 &114137787580245914
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_Enabled: 1
@@ -110,12 +111,10 @@ MonoBehaviour:
   healthRegenerateAmount: 1
   maxSpeed: 10
   jumpForce: 500
-  weaponDamageMultiplier: 1
-  weaponFireRateMultiplier: 1
 --- !u!114 &114327863058121732
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_Enabled: 1
@@ -130,7 +129,7 @@ MonoBehaviour:
 --- !u!114 &114917569533165224
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_Enabled: 1
@@ -142,7 +141,7 @@ MonoBehaviour:
 --- !u!114 &114995490942516682
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344406847518466}
   m_Enabled: 1
@@ -150,11 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1781205cb6a44ad47a726212e0278144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xp: 0
   mainLevelSoundtrackName: MainLevelSoundtrack
   playerPrefab: {fileID: 4904165940771094, guid: 5e5f19688000f3a45b5a2adf16321b0c,
     type: 2}
   spawnPoint: {fileID: 4322780629142818}
+  m_Xp: 0
   m_UpgradeMenu: {fileID: 0}
   m_GameOverUI: {fileID: 0}
   m_OnGameUI: {fileID: 0}
